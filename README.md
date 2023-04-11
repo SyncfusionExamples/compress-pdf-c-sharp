@@ -13,7 +13,7 @@ This repository contains the example optimize PDF document with multiple ways.
 
 Sample name | Description
 --- | ---
-[Compress PDF]() | Demonstrates the optimization of an existing PDF document based on image quality, page content, metadata, annotation, form fields, incremental update and font to reduce the file size of the PDF document. 
+[Compress PDF](https://github.com/SyncfusionExamples/compress-pdf-c-sharp/tree/master/Compress_PDF_WF) | Demonstrates the optimization of an existing PDF document based on image quality, page content, metadata, annotation, form fields, incremental update and font to reduce the file size of the PDF document. 
 
 ## Reducing PDF file size by shrinking all images
 
