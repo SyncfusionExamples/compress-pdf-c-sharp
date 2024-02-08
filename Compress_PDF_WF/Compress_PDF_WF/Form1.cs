@@ -1,15 +1,5 @@
-﻿using Syncfusion.Pdf;
 using Syncfusion.Pdf.Parsing;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using Syncfusion.Pdf;
 
 namespace Compress_PDF_WF
 {
@@ -18,10 +8,9 @@ namespace Compress_PDF_WF
         public Form1()
         {
             InitializeComponent();
-
             this.openFileDialog1.Filter = "PDF files (*.pdf)|*.pdf";
-            this.pictureBox1.Image = System.Drawing.Image.FromFile("../../Data/pdf_header.png");
-            this.Icon = System.Drawing.Icon.ExtractAssociatedIcon("../../Data/syncfusion.ico");
+            this.pictureBox1.Image = System.Drawing.Image.FromFile("../../../Data/pdf_header.png");
+            this.Icon = System.Drawing.Icon.ExtractAssociatedIcon("../../../Data/syncfusion.ico");
             this.MinimizeBox = true;
             for (int i = 1; i <= 100; i++)
                 this.imageQuality.Items.Add(i);
@@ -30,8 +19,8 @@ namespace Compress_PDF_WF
             this.compressPageContents.Checked = true;
             this.removeMetadata.Checked = true;
             this.compressImage.Checked = true;
-            this.Height = 475;
-            textBox1.Tag = @"..\..\Data\jQuery_Succinctly.pdf";
+            this.Height = 1500;
+            textBox1.Tag = @"..\..\..\Data\jQuery_Succinctly.pdf";
             textBox1.Text = "jQuery_Succinctly.Pdf";
         }
 
@@ -110,7 +99,7 @@ namespace Compress_PDF_WF
                         File.WriteAllBytes("Sample.pdf", ms.ToArray());
                         ms.Dispose();
                         //Launching the PDF file using the default Application.[Acrobat Reader]
-                        System.Diagnostics.Process.Start("Sample.pdf");
+                        //System.Diagnostics.Process.Start("Sample.pdf");
                         this.Close();
                     }
                     else
@@ -130,7 +119,6 @@ namespace Compress_PDF_WF
                 MessageBox.Show("Please select the valid PDF file.");
             }
         }
-
         #region Helper methods
         public void RemoveFormFields(PdfLoadedDocument ldoc, bool flatten)
         {
@@ -173,7 +161,6 @@ namespace Compress_PDF_WF
                 }
             }
         }
-
         private void button2_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -183,7 +170,6 @@ namespace Compress_PDF_WF
                 this.ods.Text = this.cds.Text = "";
             }
         }
-
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             if (compressImage.Checked)

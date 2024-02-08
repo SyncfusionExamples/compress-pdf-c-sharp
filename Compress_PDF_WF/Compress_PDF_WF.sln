@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.3.32819.101
+VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Compress_PDF_WF", "Compress_PDF_WF\Compress_PDF_WF.csproj", "{152CEB4E-547A-4D5E-B1F5-98BF6A13AB8E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Compress_PDF_WF", "Compress_PDF_WF\Compress_PDF_WF.csproj", "{23809827-FED7-4840-A6E6-38C98E5FA317}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{152CEB4E-547A-4D5E-B1F5-98BF6A13AB8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{152CEB4E-547A-4D5E-B1F5-98BF6A13AB8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{152CEB4E-547A-4D5E-B1F5-98BF6A13AB8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{152CEB4E-547A-4D5E-B1F5-98BF6A13AB8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23809827-FED7-4840-A6E6-38C98E5FA317}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23809827-FED7-4840-A6E6-38C98E5FA317}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23809827-FED7-4840-A6E6-38C98E5FA317}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23809827-FED7-4840-A6E6-38C98E5FA317}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {B1D8DD8A-7409-42F5-9C7B-944A92C57181}
+		SolutionGuid = {F4E25BA2-C8F0-40F5-A542-842697BD9403}
 	EndGlobalSection
 EndGlobal
