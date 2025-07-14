@@ -9,22 +9,21 @@ namespace Compress_PDF_WF
         {
             InitializeComponent();
             this.openFileDialog1.Filter = "PDF files (*.pdf)|*.pdf";
-            this.pictureBox1.Image = System.Drawing.Image.FromFile("../../../Data/pdf_header.png");
             this.Icon = System.Drawing.Icon.ExtractAssociatedIcon("../../../Data/syncfusion.ico");
-            this.MinimizeBox = true;
             for (int i = 1; i <= 100; i++)
                 this.imageQuality.Items.Add(i);
             this.imageQuality.SelectedIndex = 49;
             this.optimizeFont.Checked = true;
-            this.compressPageContents.Checked = true;
+            this.optimizePageContents.Checked = true;
             this.removeMetadata.Checked = true;
             this.compressImage.Checked = true;
-            this.Height = 1500;
+            this.disableIncrementalUpdates.Checked = true;
             textBox1.Tag = @"..\..\..\Data\jQuery_Succinctly.pdf";
             textBox1.Text = "jQuery_Succinctly.Pdf";
+            this.Height = 631;
         }
 
-        private void compressPDF_Click(object sender, EventArgs e)
+        private void compressPdf_Click(object sender, EventArgs e)
         {
             if (textBox1.Text != null && textBox1.Text != string.Empty)
             {
@@ -56,7 +55,7 @@ namespace Compress_PDF_WF
                         options.OptimizeFont = false;
 
                     //Compress the page contents
-                    if (compressPageContents.Checked)
+                    if (optimizePageContents.Checked)
                         options.OptimizePageContents = true;
                     else
                         options.OptimizePageContents = false;
@@ -70,9 +69,8 @@ namespace Compress_PDF_WF
                     //Set the options to loaded PDF document
                     ldoc.CompressionOptions = options;
 
-
                     //Restructure the document
-                    if (incrementalUpdate.Checked)
+                    if (disableIncrementalUpdates.Checked)
                         ldoc.FileStructure.IncrementalUpdate = false;
                     else
                         ldoc.FileStructure.IncrementalUpdate = true;
@@ -81,8 +79,12 @@ namespace Compress_PDF_WF
                         RemoveFormFields(ldoc, false);
 
                     //Remove annotation and its data.
-                    if (removeAnnotation.Checked)
+                    if (removeAnnotations.Checked)
                         RemoveAnnotations(ldoc, false);
+
+                    //Remove attachments
+                    if (removeAttachments.Checked)
+                        RemoveAttachments(ldoc);
 
                     //Save the document 
                     MemoryStream ms = new MemoryStream();
@@ -90,7 +92,7 @@ namespace Compress_PDF_WF
 
                     this.ods.Text = (inputFile.Length / 1024).ToString() + " KB";
                     this.cds.Text = (ms.Length / 1024).ToString() + " KB ";
-                    this.Height = 580;
+                    this.Height = 741;
 
                     if (MessageBox.Show("Do you want to view the PDF file?", "PDF File Created",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Information)
@@ -98,8 +100,8 @@ namespace Compress_PDF_WF
                     {
                         File.WriteAllBytes("Sample.pdf", ms.ToArray());
                         ms.Dispose();
-                        //Launching the PDF file using the default Application.[Acrobat Reader]
-                        //System.Diagnostics.Process.Start("Sample.pdf");
+                        //Launching the PDF file using the default Application.[Acrobat Reader]                        
+                        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("Sample.pdf") { UseShellExecute = true });
                         this.Close();
                     }
                     else
@@ -126,7 +128,7 @@ namespace Compress_PDF_WF
             {
                 if (flatten)
                 {
-                    ldoc.Form.Flatten = true;
+                    ldoc.Form.FlattenFields();
                 }
                 else
                 {
@@ -138,20 +140,15 @@ namespace Compress_PDF_WF
                 }
             }
         }
-
         public void RemoveAnnotations(PdfLoadedDocument ldoc, bool flatten)
         {
-            foreach (PdfPageBase page in ldoc.Pages)
+            if (flatten)
             {
-                if (flatten)
-                {
-                    int count = page.Annotations.Count;
-                    for (int i = count - 1; i >= 0; i--)
-                    {
-                        page.Annotations[i].Flatten = true;
-                    }
-                }
-                else
+                ldoc.FlattenAnnotations();
+            }
+            else
+            {
+                foreach (PdfPageBase page in ldoc.Pages)
                 {
                     int count = page.Annotations.Count;
                     for (int i = count - 1; i >= 0; i--)
@@ -161,7 +158,18 @@ namespace Compress_PDF_WF
                 }
             }
         }
-        private void button2_Click(object sender, EventArgs e)
+        public void RemoveAttachments(PdfLoadedDocument ldoc)
+        {
+            if (ldoc.Attachments != null)
+            {
+                int count = ldoc.Attachments.Count;
+                for (int i = count - 1; i >= 0; i--)
+                {
+                    ldoc.Attachments.RemoveAt(i);
+                }
+            }
+        }
+        private void browseButton_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -170,14 +178,14 @@ namespace Compress_PDF_WF
                 this.ods.Text = this.cds.Text = "";
             }
         }
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+
+        private void compressImage_CheckedChanged(object sender, EventArgs e)
         {
             if (compressImage.Checked)
                 this.imageQuality.Enabled = true;
             else
                 this.imageQuality.Enabled = false;
         }
-
         #endregion
     }
 }
